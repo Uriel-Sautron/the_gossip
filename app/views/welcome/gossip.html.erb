@@ -1,0 +1,5 @@
+<h1>Bienvenue sur le Gossip de <%= @gossip.user.first_name %> <%= @gossip.user.last_name %></h1>
+<h2>Titre de ce Gossip : <%= @gossip.title.upcase %></h2>
+<p><%= @gossip.content %></p>
+<p>Créer le : <%= @gossip.created_at %></p>
+<p>Pour en savoir plus sur l' auteur c'est <a href="/user<%= @gossip.user_id %>">ici<a></p>

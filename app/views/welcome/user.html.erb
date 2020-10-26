@@ -1,0 +1,15 @@
+
+<div class="card border-info mb-3" style="max-width: 18rem;">
+  <div class="card-header"><%= @user.first_name %> <%= @user.last_name%> <%= @user.age %> </div>
+  <div class="card-body text-info">
+    <h5 class="card-title">Description :</h5>
+    <p class="card-text"><%= @user.description%></p>
+     <h5 class="card-title">Email :</h5>
+    <p class="card-text"><%= @user.email %></p>
+  </div>
+  <div class="card-footer bg-transparent">Profil crée le : <%= @user.created_at%></div>
+</div>
+
+
+
+
