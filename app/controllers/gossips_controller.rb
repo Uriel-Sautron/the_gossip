@@ -4,22 +4,39 @@ class GossipsController < ApplicationController
   end
 
   def show
-    @gossip = Gossip.find_by(id: params[:id])
+    @gossip = Gossip.find(params[:id])
   end
 
   def index
+    @gossips = Gossip.all
   end
 
   def create
-   
     @gossip = Gossip.create(title: params[:title], content: params[:content], user: User.first)
     if @gossip.save
       redirect_to gossips_path
-      flash[:success] = "Gossip enregister"
+      flash[:success] = "Gossip enregistré"
     else
-      render 'new'
       flash[:error] = "Error"
+      render 'new'
     end
+  end
+   
+  def edit
+    @gossip = Gossip.find(params[:id])
+  end
+
+  def update
+    @gossip = Gossip.find(params[:id])
+    gossip_params = params.require(:gossip).permit(:title, :content)
+    @gossip.update(gossip_params)
+    redirect_to gossip_path(@gossip.id)
+  end 
+
+  def destroy
+    @gossip = Gossip.find(params[:id])
+    @gossip.destroy
+    redirect_to gossips_path
   end
 
 

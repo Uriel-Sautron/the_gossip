@@ -1,5 +1,7 @@
 <h1>Bienvenue sur le Gossip de <%= @gossip.user.first_name %> <%= @gossip.user.last_name %></h1>
+<p>Ville : <%=link_to @gossip.user.city.name, city_path(@gossip.user.city_id) %></p>
 <h2>Titre de ce Gossip : <%= @gossip.title.upcase %></h2>
 <p><%= @gossip.content %></p>
 <p>Créer le : <%= @gossip.created_at %></p>
 <p>Pour en savoir plus sur l' auteur c'est <a href="/user<%= @gossip.user_id %>">ici<a></p>
+<%= link_to "Supprimer", gossip_path(@gossip.id), class: "btn btn-danger", method: "delete" %>

@@ -1,7 +1,5 @@
-<h1>Bienvenue sur The Gossip Project</h1>
-<h2>Vous trouverez ici la liste des gossips :</h2>
-<%= link_to "Créer un Gossip", new_gossip_path, class: 'btn btn-primary btn-sm'%>
-<br /> <br />
+<h1>The Gossip <span class="badge badge-info">City</span></h1>
+<h2><%= @city.name %></h2>
 <% @gossips.each do |gossip| %>
 <div class="list-group mx-auto mb-3" style="width: 900px">
   <a href="<%= gossip_path(gossip.id) %>" class="list-group-item list-group-item-action ">
@@ -10,14 +8,8 @@
       <small><%= gossip.created_at %></small>
     </div>
     <p class="mb-1">Ecrit par <%= gossip.user.first_name %></p>
-    <small class="mt-2"><a href="/user<%= gossip.user_id %> " class="btn btn-outline-primary">Auteur</a>
+    <small class="mt-2"><a href="/user/<%= gossip.user.id %> " class="btn btn-outline-primary">Auteur</a>
     <a href="<%= edit_gossip_path(gossip.id)%> " class="btn btn-light">Edit</a></small>
   </a>
 </div>
 <% end %>
-
-
-
-
-
-
