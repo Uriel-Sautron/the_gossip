@@ -5,6 +5,9 @@ class GossipsController < ApplicationController
 
   def show
     @gossip = Gossip.find(params[:id])
+    session[:gossip_ip] = params[:id]
+    @comments = Comment.where(gossip_id: params[:id])
+    
   end
 
   def index
