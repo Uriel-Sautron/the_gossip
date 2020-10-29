@@ -10,8 +10,12 @@
       <small><%= gossip.created_at %></small>
     </div>
     <p class="mb-1">Ecrit par <%= gossip.user.first_name %></p>
-    <small class="mt-2"><a href="<%= user_path(gossip.user_id) %> " class="btn btn-outline-primary">Auteur</a>
-    <a href="<%= edit_gossip_path(gossip.id)%> " class="btn btn-light">Edit</a></small>
+    <small class="mt-2"><a href="<%= user_path(gossip.user_id) %> " class="btn btn-outline-primary">Auteur</a></small>
+    
+    <% if current_user == gossip.user %>
+    <small class="mt-2"><a href="<%= edit_gossip_path(gossip.id)%> " class="btn btn-light">Edit</a></small>
+    <% end %>
+    
   </a>
 </div>
 <% end %>

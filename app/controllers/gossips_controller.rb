@@ -1,4 +1,8 @@
 class GossipsController < ApplicationController
+  
+  before_action :authenticate_user, only: [:new, :ceate, :show]
+  #before_action :permit_user, only: [:destroy, :update, :edit]
+
   def new
     @gossip = Gossip.new
   end
@@ -21,7 +25,7 @@ class GossipsController < ApplicationController
     else
       @gossip.user = anonymous
     end
-    
+
     if @gossip.save
       redirect_to gossips_path
       flash[:success] = "Gossip enregistré"
@@ -32,21 +36,37 @@ class GossipsController < ApplicationController
   end
    
   def edit
-    @gossip = Gossip.find(params[:id])
+      @gossip = Gossip.find(params[:id])
   end
 
   def update
-    @gossip = Gossip.find(params[:id])
-    gossip_params = params.require(:gossip).permit(:title, :content)
-    @gossip.update(gossip_params)
-    redirect_to gossip_path(@gossip.id)
+      @gossip = Gossip.find(params[:id])
+      gossip_params = params.require(:gossip).permit(:title, :content)
+      @gossip.update(gossip_params)
+      redirect_to gossip_path(@gossip.id)
   end 
 
   def destroy
-    @gossip = Gossip.find(params[:id])
-    @gossip.destroy
-    redirect_to gossips_path
+      @gossip = Gossip.find(params[:id])
+      @gossip.destroy
+      redirect_to gossips_path
   end
 
+  private
+
+  def authenticate_user
+    unless current_user
+      flash[:error] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
+  def permit_user
+    
+    unless current_user == @gossip.user
+      flash[:error] = "Seul l' auteur est autorisé"
+      redirect_to gossip_path(@gossip.id)
+    end
+  end
 
 end
