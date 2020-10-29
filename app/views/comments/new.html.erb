@@ -1,6 +1,22 @@
 <h1>The Gossip <span class="badge badge-info">Comment</span></h1>
 
+  <% if current_user %>
+    <h2>Ecrit ton commentaire ici <%= current_user.first_name%> </h2>
+    <div class="form-group">
+      <%= form_tag url_for(action: 'create'), method: 'post' do %>
+       <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+   
+      <div class='form-group'>
+        <p class="h3"><%= label_tag 'Content' %></p>
+          <%= text_area_tag 'content', @comment.content, class: 'form-control', placeholder: 'Entrer votre commentaire' %>
+      </div>
+      <br /> <br />
 
+      <%= submit_tag "Envoyer votre commentaire", class: 'btn btn-primary' %>
+       <% end %>
+
+
+    <% elsif %>
 
   <div class="form-group">
 
@@ -22,6 +38,7 @@
   <% end %>
   
   </div>
+  <% end %>
 
 <% if @comment.errors.any? %>
   <p>Nous n'avons pas réussi à créer le commentaire pour la (ou les) raison(s) suivante(s) :</p>

@@ -28,6 +28,9 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.create(comment_params)
+    if current_user
+    @comment.username = current_user.first_name
+    end
     @comment.gossip_id = session[:gossip_ip]
     
       if @comment.save
@@ -55,14 +58,11 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
-  # DELETE /comments/1.json
+
   def destroy
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
+    
   end
 
   private
@@ -75,4 +75,5 @@ class CommentsController < ApplicationController
     def comment_params
       params.permit(:username, :content)
     end
+  
 end

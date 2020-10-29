@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    puts user_par = params.permit(:email, :password).inspect
+    user_par = params.permit(:email, :password).inspect
      # cherche s'il existe un utilisateur en base avec l’e-mail
     user = User.find_by(email: params[:email])
 
@@ -18,6 +18,11 @@ class SessionsController < ApplicationController
       flash[:error] = 'Invalid email/password combination'
       render 'new'
     end
+  end
+
+  def destroy
+    session.delete(:user_id)
+    redirect_to new_session_path
   end
 
   private

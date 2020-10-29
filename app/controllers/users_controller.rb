@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     @user.city_id = 11
     if @user.save
+      log_in(@user)
       redirect_to gossips_path
 
     else

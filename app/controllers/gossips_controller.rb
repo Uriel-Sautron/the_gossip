@@ -15,7 +15,13 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.create(title: params[:title], content: params[:content], user: User.first)
+    @gossip = Gossip.create(title: params[:title], content: params[:content])
+    if current_user
+      @gossip.user = current_user
+    else
+      @gossip.user = anonymous
+    end
+    
     if @gossip.save
       redirect_to gossips_path
       flash[:success] = "Gossip enregistré"
