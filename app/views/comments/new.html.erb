@@ -22,9 +22,9 @@
   <% end %>
   
   </div>
-<p> <%= @gossip_id %></p>
+
 <% if @comment.errors.any? %>
-  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <p>Nous n'avons pas réussi à créer le commentaire pour la (ou les) raison(s) suivante(s) :</p>
   <ul>
     <% @comment.errors.full_messages.each do |message| %>
       <li><%= message %></li>

@@ -17,7 +17,17 @@
         <a class="navbar-brand" href="<%= gossips_path %>">Home</a>
         <a class="navbar-brand" href="<%= gossips_path %>">Gossips</a>
         <a class="navbar-brand" href="<%= teams_path %>">Team <span class="sr-only"></span></a>
-        <a class="navbar-brand"" href="<%= contacts_path %>">Contact <span class="sr-only"></span></a>
+        <a class="navbar-brand" href="<%= contacts_path %>">Contact <span class="sr-only"></span></a>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Session
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="<%= new_user_path %>">Inscription</a>
+            <a class="dropdown-item" href="<%= new_session_path %>">Connexion</a>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -31,6 +41,13 @@
     <% elsif flash[:error] %>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <%= flash[:error] %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>  
+      </div>
+      <% elsif flash[:notice] %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= flash[:notice] %>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>  
